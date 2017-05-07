@@ -1,6 +1,7 @@
 #include <Adafruit_NeoPixel.h>
-#define PIN 6
-#define LED_NUMBER 8
+
+static const int PIN = 6;
+static const int LED_NUMBER = 8;
 
 // Parameter 1 = number of pixels in strip
 // Parameter 2 = pin number (most are valid)
@@ -14,13 +15,14 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(LED_NUMBER, PIN, NEO_GRB + NEO_KHZ80
 void setup() {
   //  Serial.begin(9600);
   strip.begin();
-  strip.setBrightness(16);
+  strip.setBrightness(255);
   strip.show(); // Initialize all pixels to 'off'
 }
 
 void loop() {
   for (int i = 0; i < LED_NUMBER; i++)
-    strip.setPixelColor(i, i * 64 % 255, (LED_NUMBER - i) * 16 % 255, (i * i * 255) % 255);
+    strip.setPixelColor(i, 0, 235, 200);
+//    strip.setPixelColor(i, i * 64 % 255, (LED_NUMBER - i) * 16 % 255, (i * i * 255) % 255);
 
   strip.show();
 }

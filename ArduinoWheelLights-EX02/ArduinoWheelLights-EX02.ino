@@ -1,8 +1,11 @@
 #include <Adafruit_NeoPixel.h>
 #include "figure.h"
 
-#define PIN 6
-#define LED_NUMBER 8
+static const int PIN = 6;
+static const int LED_NUMBER = 8;
+static const int PIN_MINUS = 8;
+static const int PIN_PLUS = 9;
+static const int PIN_SENSOR = 10;
 
 // Parameter 1 = number of pixels in strip
 // Parameter 2 = pin number (most are valid)
@@ -18,8 +21,16 @@ short cOff[3] = {0, 0, 0};
 
 void setup() {
   Serial.begin(9600);
+
+  pinMode(PIN_MINUS, OUTPUT);
+  pinMode(PIN_PLUS, OUTPUT);
+  pinMode(PIN_SENSOR, INPUT);
+
+  digitalWrite(PIN_MINUS, LOW);
+  digitalWrite(PIN_PLUS, HIGH);
+  
   strip.begin();
-  strip.setBrightness(1);
+  strip.setBrightness(128);
   strip.show(); // Initialize all pixels to 'off'
 }
 
@@ -30,12 +41,9 @@ void loop() {
   strip.show();
   Serial.println("off");
 
-  int k = 0;
-  while (k < 1000) // change to readDigital...
+  while (digitalRead(PIN_SENSOR) == HIGH)
   {
-    //    delayMicroseconds(1);
     delay(1);
-    k++;
   }
   Serial.println("on");
 
@@ -45,7 +53,7 @@ void loop() {
       setStripColor(i, FIGURE[figurePosition][i]);
     strip.show();
     figurePosition++;
-    delay(50);
+    delay(8);
   }
 }
 

@@ -65,9 +65,12 @@ void loop() {
   }
 }
 
-void setStripColor(int n, byte color[3])
+void setStripColor(int n, bool colorOn)
 {
-  strip.setPixelColor(n, color[0], color[1], color[2]);
+  if (colorOn)
+    strip.setPixelColor(n, 60, 200, 60);
+  else
+    strip.setPixelColor(n, 0, 0, 0);
 }
 
 boolean wait(int delayTime)
