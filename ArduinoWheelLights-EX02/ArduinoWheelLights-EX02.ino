@@ -53,7 +53,7 @@ void loop() {
       setStripColor(i, FIGURE[figurePosition][i]);
     strip.show();
     figurePosition++;
-    delay(8);
+    delay(4);
   }
 }
 
